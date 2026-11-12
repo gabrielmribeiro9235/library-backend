@@ -40,4 +40,14 @@ app.get("/livros/:id", (req, res) => {
     res.status(200).json(livros[index]);
 });
 
+app.put("/livros/:id", (req, res) => {
+    const index = buscaLivro(req.params.id);
+    if (index === -1) {
+        return res.status(404).json({ message: "Livro não existe" });
+    }
+
+    livros[index].titulo = req.body.titulo;
+    res.status(200).json(livros[index]);
+})
+
 export default app;
