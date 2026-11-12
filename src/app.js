@@ -48,6 +48,16 @@ app.put("/livros/:id", (req, res) => {
 
     livros[index].titulo = req.body.titulo;
     res.status(200).json(livros[index]);
+});
+
+app.delete("/livros/:id", (req, res) => {
+    const index = buscaLivro(req.params.id);
+    if (index === -1) {
+        return res.status(404).json({ message:"Livro não existe" });
+    }
+
+    livros.splice(index, 1);
+    res.status(200).json({ message: "Livro removido" });
 })
 
 export default app;
